@@ -6,3 +6,10 @@
   padding: 6rem;
   min-height: 100vh;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+}

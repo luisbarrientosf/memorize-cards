@@ -1,0 +1,12 @@
+.textinput{
+  background-color: #dadada;
+  color: black;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  min-width: 120px;
+  border: 1px solid #888;
+}
