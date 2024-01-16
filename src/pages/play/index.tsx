@@ -1,36 +1,97 @@
 "use client";
-import Image from 'next/image';
-// import { TextInput } from '@/presentation/components/TextInput/TextInput';
-// import { Button } from '@/presentation/components/Button/Button';
-// import { useEffect, useState } from 'react';
-// import { getUser } from '@/infrastructure/actions/getUser';
-// import { setUser } from '@/infrastructure/actions/setUser';
-// import { User } from '@/domain/entities/User.entity';
-// import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { getCards } from '@/infrastructure/actions/getCards';
+import { MemorizeCard } from '@/presentation/components/MemorizeCard/MemorizeCard';
+import { shuffleArray } from '@/infrastructure/utils';
 
+interface InGameCard {
+  id: string;
+  uuid: string;
+  url: string;
+  matched: boolean;
+}
 
 export default function Play() {
-  // const router = useRouter();
-  // const [userLogged, setUserLogged] = useState<User|null>(null);
-  // const [name, setName] = useState<string>("");
+  const [cards, setCards] = useState<InGameCard[]|null>(null);
+  const [selectedCards, setSelectedCards] = useState<InGameCard[]>([]);
+  const [endTurn, setEndTurn] = useState<boolean>(false);
+  const [turn, setTurn] = useState<number>(0);
+  const [successPoints, setSuccessPoints] = useState<number>(0);
+  const [failPoints, setFailPoints] = useState<number>(0);
 
-  // useEffect(() => {
-  //   if(!userLogged) {
-  //     getUser()
-  //       .then(user => {
-  //         setName(user.name);
-  //         setUserLogged(user)
-  //       })
-  //       .catch(err => console.log({ err }));
-  //   }
-  // }, [userLogged]);
+  useEffect(() => {
+    if (!cards) {
+      getCards()
+        .then(cards => {
+          const shuffledCards = shuffleArray(cards);
+          setCards(shuffledCards);
+        })
+        .catch(err => console.log({ err }));
+    }
+  }, [cards]);
 
+  useEffect(() => {
+    if (endTurn) {
+      setTimeout(() => {
+        setEndTurn(false);
+        setTurn(prevTurn => prevTurn + 1);
+        setSelectedCards([]);
+      }, 1000);
+    }
+  }, [endTurn]);
+
+  useEffect(() => {
+    if (selectedCards.length === 2 && !endTurn) {
+      if (selectedCards[0].uuid === selectedCards[1].uuid ) {
+        setCards(prevCards => prevCards!.map(card => {
+          if (selectedCards.find(c => c.id === card.id)){
+            return { ...card, matched: true };
+          } 
+          return card;
+        }));
+      
+        setSuccessPoints(prevSuccessPoints => prevSuccessPoints + 1);
+      } else {
+        setFailPoints(prevFailPoints => prevFailPoints + 1);
+      }
+      
+      setEndTurn(true);
+    }
+  }, [selectedCards, successPoints, failPoints, turn, endTurn]);
+
+
+  const handleCardClick = (selectedCard: InGameCard) => {
+    if(selectedCard.matched) return;
+
+    if(!selectedCards.find(c => c.id === selectedCard.id) && selectedCards.length < 2) {
+      setSelectedCards(prevSelectedCards => {
+        const newSelected = [...selectedCards];
+        newSelected.push(selectedCard);
+        prevSelectedCards.push(selectedCard);
+        return newSelected;
+      });
+    }
+  }
 
   return (
-    <main >
+    <>
       <div>
-        Yay
+        Success: {successPoints}
       </div>
-    </main>
+      <div>
+        Fail: {failPoints}
+      </div>
+      <div>
+        Turn: {turn + 1}
+      </div>
+      { cards && cards.map(card => 
+        <MemorizeCard
+          key={card.id}
+          card={card}
+          matched={!!selectedCards.find(c => c.id === card.id) || card.matched}
+          onClick={() => handleCardClick(card)}
+        />
+      )}
+    </>
   )
 }
