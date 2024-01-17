@@ -7,6 +7,11 @@
   perspective: 1000px;
 }
 
+.container:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 4px 1px rgb(171, 171, 171);
+}
+
 .inner {
   position: relative;
   text-align: center;
