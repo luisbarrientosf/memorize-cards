@@ -5,7 +5,7 @@ import { CardMapper } from "../mappers/CardMapper";
 
 export class CardApi implements CardRepository {
   async get(): Promise<Card[]> {
-    const images: ModyoContentResponse = await fetch("https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=20")
+    const images: ModyoContentResponse = await fetch("https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=5")
       .then(response => response.json())
       .catch(err => console.log(err));
     const cards = CardMapper.fromModyoContentResponse(images);
