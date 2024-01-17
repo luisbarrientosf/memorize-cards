@@ -87,12 +87,7 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #272b35;
 }
 
 a {
@@ -104,4 +99,8 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+textarea:focus, input:focus{
+  outline: none;
 }

@@ -1,10 +1,10 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+  row-gap: 100px;
 }
 
 .form {
@@ -12,4 +12,22 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 15px;
+  font-weight: 300;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.author {
+  text-align: center;
+}
+.author p:first-child {
+  font-weight: 200;
+}
+.author p:nth-child(2){
+  font-weight: 400;
 }

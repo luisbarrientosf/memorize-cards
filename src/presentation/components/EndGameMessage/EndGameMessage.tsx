@@ -1,4 +1,24 @@
 import { Button } from "../Button/Button";
+import styles from "./EndGameMessage.module.css";
+
+interface PointerProps {
+  points: number;
+  title: string;
+  color: string;
+}
+
+const Pointer: React.FC<PointerProps> = ({ points, title, color }) => {
+  return (
+    <div className={styles.pointsContainer} style={{ color }}>
+      <div className={styles.pointsNumber}>
+        {points}
+      </div>
+      <div className={styles.pointsText}>
+        {title}
+      </div>
+    </div>
+  )
+}
 
 interface EndGameMessageProps {
   successPoints: number;
@@ -9,26 +29,28 @@ interface EndGameMessageProps {
 
 export const EndGameMessage: React.FC<EndGameMessageProps> = (props) => {
   return(
-    <div style={{ 
-      backgroundColor: "rgba(0,0,0,0.7)", 
-      position: "absolute",
-      top: 0,
-      width: "100%",
-      minHeight: "100vh",
-      color: "white"
-    }}>
-      <div>
+    <div className={styles.container}>
+      <div className={styles.title}>
         YOU WIN
       </div>
-      <div>
-        Success: {props.successPoints}
+      <div className={styles.pointersContainer}>
+        <Pointer
+          points={props.successPoints}
+          title="Success"
+          color="#96c09b"
+        />
+        <Pointer
+          points={props.turn + 1}
+          title="Turns"
+          color="#FFFFFF"
+        />
+        <Pointer
+          points={props.failPoints}
+          title="Fail"
+          color="#cb6144"
+        />
       </div>
-      <div>
-        Fail: {props.failPoints}
-      </div>
-      <div>
-        Turn: {props.turn + 1}
-      </div>
+
       <Button
         title="New Game"
         onClick={props.handleNewGame}

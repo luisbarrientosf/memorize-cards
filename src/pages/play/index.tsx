@@ -5,7 +5,6 @@ import { MemorizeCard } from '@/presentation/components/MemorizeCard/MemorizeCar
 import { shuffleArray } from '@/infrastructure/utils';
 import { Card } from '@/domain/entities/Card.entity';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/presentation/components/Button/Button';
 import styles from './play.module.css';
 import { EndGameMessage } from '@/presentation/components/EndGameMessage/EndGameMessage';
 
@@ -97,25 +96,29 @@ export default function Play() {
 
   return (
     <main className={styles.main}>
-      <div>
-        Success: {successPoints}
+      
+      <div className={styles.infoContainer}>
+        <span>
+          Success: {successPoints}
+        </span>
+        <span>
+          Turn {turn + 1}
+        </span>
+        <span>
+          Fail: {failPoints}
+        </span>
       </div>
-      <div>
-        Fail: {failPoints}
-      </div>
-      <div>
-        Turn: {turn + 1}
-      </div>
-      <div>
-      { cards && cards.map(card => 
-        <MemorizeCard
-          key={card.id}
-          card={card}
-          error={isErrorCard(card)}
-          visible={!!selectedCards.find(c => c.id === card.id) || card.matched}
-          onClick={() => handleCardClick(card)}
-        />
-      )}
+
+      <div className={styles.cardsContainer}>
+        { cards && cards.map(card => 
+          <MemorizeCard
+            key={card.id}
+            card={card}
+            error={isErrorCard(card)}
+            visible={!!selectedCards.find(c => c.id === card.id) || card.matched}
+            onClick={() => handleCardClick(card)}
+          />
+        )}
       </div>
       
       { isEndGame && (

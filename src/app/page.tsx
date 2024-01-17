@@ -32,8 +32,17 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <div className={styles.title}>
+        <h1>
+          Memorize 
+        </h1>
+        <h3>
+          Card Game
+        </h3>
+      </div>
+      
       <div className={styles.form}>
-        Enter your name
+        Enter your name:
         <TextInput
           placeholder='Marco'
           value={name}
@@ -44,6 +53,11 @@ export default function Home() {
           onClick={handleContinueButton}
         />
       </div>
+      <div className={styles.author}>
+        <p>Developed by</p>
+        <p>Luis Barrientos Fajardo</p>
+      </div>
+  
     </main>
   )
 }
