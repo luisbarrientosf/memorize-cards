@@ -3,21 +3,21 @@ import { useEffect, useState } from 'react';
 import { getCards } from '@/infrastructure/actions/getCards';
 import { MemorizeCard } from '@/presentation/components/MemorizeCard/MemorizeCard';
 import { shuffleArray } from '@/infrastructure/utils';
-
-interface InGameCard {
-  id: string;
-  uuid: string;
-  url: string;
-  matched: boolean;
-}
+import { Card } from '@/domain/entities/Card.entity';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/presentation/components/Button/Button';
+import styles from './play.module.css';
+import { EndGameMessage } from '@/presentation/components/EndGameMessage/EndGameMessage';
 
 export default function Play() {
-  const [cards, setCards] = useState<InGameCard[]|null>(null);
-  const [selectedCards, setSelectedCards] = useState<InGameCard[]>([]);
+  const router = useRouter();
+  const [cards, setCards] = useState<Card[]|null>(null);
+  const [selectedCards, setSelectedCards] = useState<Card[]>([]);
   const [endTurn, setEndTurn] = useState<boolean>(false);
   const [turn, setTurn] = useState<number>(0);
   const [successPoints, setSuccessPoints] = useState<number>(0);
   const [failPoints, setFailPoints] = useState<number>(0);
+  const [isEndGame, setIsEndGame] = useState<boolean>(false);
 
   useEffect(() => {
     if (!cards) {
@@ -34,11 +34,18 @@ export default function Play() {
     if (endTurn) {
       setTimeout(() => {
         setEndTurn(false);
+        if(cards){
+          if (cards.length === cards.filter(c => c.matched).length) {
+            setIsEndGame(true);
+            setSelectedCards([]);
+            return;
+          }
+        }
         setTurn(prevTurn => prevTurn + 1);
         setSelectedCards([]);
-      }, 1000);
+      }, 1200);
     }
-  }, [endTurn]);
+  }, [endTurn, cards, router]);
 
   useEffect(() => {
     if (selectedCards.length === 2 && !endTurn) {
@@ -60,7 +67,7 @@ export default function Play() {
   }, [selectedCards, successPoints, failPoints, turn, endTurn]);
 
 
-  const handleCardClick = (selectedCard: InGameCard) => {
+  const handleCardClick = (selectedCard: Card) => {
     if(selectedCard.matched) return;
 
     if(!selectedCards.find(c => c.id === selectedCard.id) && selectedCards.length < 2) {
@@ -73,8 +80,23 @@ export default function Play() {
     }
   }
 
+  const isErrorCard = (card: Card) => {
+    if (selectedCards.length === 2 && selectedCards.find(c => c.id === card.id)) {
+      return selectedCards[0].uuid !== selectedCards[1].uuid
+    }
+    return false;
+  }
+
+  const handleNewGame = () => {
+    setCards(null);
+    setIsEndGame(false);
+    setSuccessPoints(0);
+    setFailPoints(0);
+    setTurn(0);
+  }
+
   return (
-    <>
+    <main className={styles.main}>
       <div>
         Success: {successPoints}
       </div>
@@ -84,14 +106,26 @@ export default function Play() {
       <div>
         Turn: {turn + 1}
       </div>
+      <div>
       { cards && cards.map(card => 
         <MemorizeCard
           key={card.id}
           card={card}
-          matched={!!selectedCards.find(c => c.id === card.id) || card.matched}
+          error={isErrorCard(card)}
+          visible={!!selectedCards.find(c => c.id === card.id) || card.matched}
           onClick={() => handleCardClick(card)}
         />
       )}
-    </>
+      </div>
+      
+      { isEndGame && (
+        <EndGameMessage 
+          successPoints={successPoints}
+          failPoints={failPoints}
+          turn={turn}
+          handleNewGame={handleNewGame}
+        />
+      )}
+    </main>
   )
 }
