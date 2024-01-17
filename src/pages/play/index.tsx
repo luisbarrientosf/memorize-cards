@@ -1,15 +1,16 @@
 "use client";
 import { useEffect, useState } from 'react';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { getCards } from '@/infrastructure/actions/getCards';
 import { MemorizeCard } from '@/presentation/components/MemorizeCard/MemorizeCard';
 import { shuffleArray } from '@/infrastructure/utils';
 import { Card } from '@/domain/entities/Card.entity';
-import { useRouter } from 'next/navigation';
-import styles from './play.module.css';
 import { EndGameMessage } from '@/presentation/components/EndGameMessage/EndGameMessage';
+import styles from './play.module.css';
 
 export default function Play() {
   const router = useRouter();
+  const player = useSearchParams()!.get("player") || "";
   const [cards, setCards] = useState<Card[]|null>(null);
   const [selectedCards, setSelectedCards] = useState<Card[]>([]);
   const [endTurn, setEndTurn] = useState<boolean>(false);
@@ -126,6 +127,7 @@ export default function Play() {
           successPoints={successPoints}
           failPoints={failPoints}
           turn={turn}
+          player={player}
           handleNewGame={handleNewGame}
         />
       )}

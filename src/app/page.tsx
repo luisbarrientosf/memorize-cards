@@ -27,7 +27,7 @@ export default function Home() {
 
   const handleContinueButton = async () => {
     await setUser(name);
-    router.push("/play");
+    router.push(`/play?player=${name}`);
   }
 
   return (
@@ -44,12 +44,13 @@ export default function Home() {
       <div className={styles.form}>
         Enter your name:
         <TextInput
-          placeholder='Marco'
+          placeholder='John Doe'
           value={name}
           onChange={setName}
         />
         <Button
           title='Continue'
+          disabled={name.trim().length === 0}
           onClick={handleContinueButton}
         />
       </div>

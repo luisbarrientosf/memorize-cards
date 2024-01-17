@@ -24,6 +24,7 @@ interface EndGameMessageProps {
   successPoints: number;
   failPoints: number;
   turn: number;
+  player: string;
   handleNewGame: () => void;
 }
 
@@ -31,7 +32,7 @@ export const EndGameMessage: React.FC<EndGameMessageProps> = (props) => {
   return(
     <div className={styles.container}>
       <div className={styles.title}>
-        YOU WIN
+        Congratulations, { props.player } !
       </div>
       <div className={styles.pointersContainer}>
         <Pointer
