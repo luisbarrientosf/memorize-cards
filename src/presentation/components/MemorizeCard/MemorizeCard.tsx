@@ -28,13 +28,15 @@ export const MemorizeCard: React.FC<MemorizeCardProps> = (props) => {
       onClick={props.onClick}
     >
       <div className={styles.inner}>
-        <div className={styles.back} />
-
+        <div className={styles.back}>
+          ?
+        </div>
+        
         <Image
           alt='card image'
           className={styles.image}
           width={100}
-          height={100}
+          height={120}
           src={props.card.url}
         />
       </div>
