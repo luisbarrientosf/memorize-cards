@@ -21,19 +21,19 @@
   align-self: center;
 }
 
-.button:hover{
+.button:hover:not(.disabled){
   background-color: hsl(169, 64%, 55%);
   color: #0f0f0f;
   transition: all 0.3s;
   cursor: pointer;
 }
 
-.icon {
-  height: 14px;
-  width: 14px;
-}
-
 .button:hover > .icon {
   -webkit-filter: invert(1); /* Safari/Chrome */
   filter: invert(1);
+}
+
+.disabled {
+  background-color: gray;
+  color: rgb(80, 80, 80);
 }

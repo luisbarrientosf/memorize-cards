@@ -1,25 +1,23 @@
-import Image from 'next/image';
 import styles from './Button.module.css'
 
 interface ButtonProps {
   onClick: () => void;
   title: string;
-  icon?: string;
+  disabled?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ onClick, title, icon }) => {
+export const Button: React.FC<ButtonProps> = ({ onClick, title, disabled }) => {
+  const buttonStyles = [styles.button];
+  if (disabled) {
+    buttonStyles.push(styles.disabled);
+  }
+
   return (
     <button
-      className={styles.button}
+      className={buttonStyles.join(" ")}
       onClick={onClick}
+      disabled={disabled}
     >
-      { icon && (
-        <Image
-          src={icon}
-          className={styles.icon}
-          alt={`${title} image`}
-          /> 
-      )}
       {title} 
     </button>
   )
