@@ -25,7 +25,6 @@ describe('TextInput', () => {
       />
     );
     const input = screen.getByPlaceholderText("placeholder-test");
-    console.log(input)
     expect(input).toBeInTheDocument();
     fireEvent.change(input, { target: { value: "TEST"}})
     expect(spyFn).toHaveBeenCalledTimes(1);
