@@ -7,6 +7,7 @@ import { Card } from '@/domain/entities/Card.entity';
 import { getCards } from '@/infrastructure/actions/getCards';
 import { shuffleArray } from '@/infrastructure/utils';
 import styles from './PlayScreen.module.css';
+import { Loading } from '@/presentation/components/Loading/Loading';
 
 export default function PlayScreen() {
   const router = useRouter();
@@ -112,17 +113,21 @@ export default function PlayScreen() {
         </span>
       </p>
 
-      <div className={styles.cardsContainer}>
-        { cards && cards.map(card => 
-          <MemorizeCard
-            key={card.id}
-            card={card}
-            error={isErrorCard(card)}
-            visible={!!selectedCards.find(c => c.id === card.id) || card.matched}
-            onClick={() => handleCardClick(card)}
-          />
-        )}
-      </div>
+      { !cards && <Loading /> }
+      
+      { cards && (
+        <div className={styles.cardsContainer}>
+          { cards.map(card => 
+            <MemorizeCard
+              key={card.id}
+              card={card}
+              error={isErrorCard(card)}
+              visible={!!selectedCards.find(c => c.id === card.id) || card.matched}
+              onClick={() => handleCardClick(card)}
+            />
+          )}
+        </div>
+      )}
       
       { isEndGame && (
         <EndGameMessage 
