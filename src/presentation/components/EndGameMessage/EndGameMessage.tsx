@@ -10,12 +10,12 @@ interface PointerProps {
 const Pointer: React.FC<PointerProps> = ({ points, title, color }) => {
   return (
     <div className={styles.pointsContainer} style={{ color }}>
-      <div className={styles.pointsNumber}>
+      <p className={styles.pointsNumber}>
         {points}
-      </div>
-      <div className={styles.pointsText}>
+      </p>
+      <p className={styles.pointsText}>
         {title}
-      </div>
+      </p>
     </div>
   )
 }
@@ -41,7 +41,7 @@ export const EndGameMessage: React.FC<EndGameMessageProps> = (props) => {
           color="#96c09b"
         />
         <Pointer
-          points={props.turn + 1}
+          points={props.turn}
           title="Turns"
           color="#FFFFFF"
         />

@@ -126,7 +126,7 @@ export default function Play() {
         <EndGameMessage 
           successPoints={successPoints}
           failPoints={failPoints}
-          turn={turn}
+          turn={turn + 1}
           player={player}
           handleNewGame={handleNewGame}
         />
