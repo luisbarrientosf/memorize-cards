@@ -1,13 +1,15 @@
 import '@testing-library/jest-dom'
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import Play from '@/pages/play';
 import fetchMock from "jest-fetch-mock"
 import { ModyoContentResponseMother } from '../../../__mocks__/ModyoContentResponse.mock';
 
+const PLAYER_NAME = "Luis Barrientos Fajardo";
+
 jest.mock('next/navigation', () => ({
   ...require('next-router-mock'),
   useSearchParams: () => ({
-    get: jest.fn().mockReturnValue("Luis")
+    get: jest.fn().mockReturnValue(PLAYER_NAME)
   }),
 }));
 
@@ -73,5 +75,39 @@ describe('Play Screen', () => {
     expect(await screen.findByText('Turn 2')).toBeInTheDocument();
     expect(await screen.findByText('Success: 0')).toBeInTheDocument();
     expect(await screen.findByText('Fail: 1')).toBeInTheDocument();
+  });
+
+  it('shows end game message', async () => {
+    const mockImages = ModyoContentResponseMother.twoImages();
+    fetchMock.mockResponse(JSON.stringify(mockImages));
+    await act(() => render(<Play />));
+
+    const choiceOne = screen.getByAltText(`card ${mockImages.entries[0].fields.image.uuid}`);
+    const choiceTwo = screen.getByAltText(`card ${mockImages.entries[0].fields.image.uuid}_2`);
+    await act(() => fireEvent.click(choiceOne));
+    await act(() => fireEvent.click(choiceTwo));
+    await act(async () => jest.advanceTimersByTime(2000));
+
+    const choiceThree = screen.getByAltText(`card ${mockImages.entries[1].fields.image.uuid}`);
+    const choiceFour = screen.getByAltText(`card ${mockImages.entries[1].fields.image.uuid}_2`);
+    await act(() => fireEvent.click(choiceThree));
+    await act(() => fireEvent.click(choiceFour));
+    await act(async () => jest.advanceTimersByTime(2000));
+
+
+    expect(await screen.findByText(`Turn ${mockImages.entries.length}`)).toBeInTheDocument();
+    expect(await screen.findByText(`Success: ${mockImages.entries.length}`)).toBeInTheDocument();
+    expect(await screen.findByText('Fail: 0')).toBeInTheDocument();
+
+    const playerName = screen.getByText(PLAYER_NAME);
+    expect(playerName).toBeInTheDocument();
+    const newGameButton = screen.getByRole("button", { name: "New Game" });
+    expect(newGameButton).toBeInTheDocument();
+    await act(() => fireEvent.click(newGameButton));
+
+    expect(await screen.findByText("Turn 1")).toBeInTheDocument();
+    expect(await screen.findByText("Success: 0")).toBeInTheDocument();
+    expect(await screen.findByText('Fail: 0')).toBeInTheDocument();
+    expect(playerName).not.toBeInTheDocument();
   });
 });
