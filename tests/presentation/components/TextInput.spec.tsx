@@ -20,13 +20,14 @@ describe('TextInput', () => {
     render(
       <TextInput
         value=''
-        placeholder='placeholder-test'
+        placeholder='placeholder'
         onChange={e => spyFn(e)}
+        label='label'
       />
     );
-    const input = screen.getByPlaceholderText("placeholder-test");
+    const input = screen.getByLabelText("label");
     expect(input).toBeInTheDocument();
-    fireEvent.change(input, { target: { value: "TEST"}})
+    fireEvent.change(input, { target: { value: "TEST"}});
     expect(spyFn).toHaveBeenCalledTimes(1);
     expect(spyFn).toHaveBeenCalledWith("TEST");
   });

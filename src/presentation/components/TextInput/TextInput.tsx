@@ -4,16 +4,22 @@ interface TextInputProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  label: string;
 }
 
 export const TextInput: React.FC<TextInputProps> = (props) => {
   return (
-    <input
-      type='text'
-      value={props.value}
-      className={styles.textinput}
-      placeholder={props.placeholder}
-      onChange={e => props.onChange(e.target.value)}
-    />
+    <>
+      <label htmlFor="textInput">{props.label}</label>
+      <input
+        type='text'
+        value={props.value}
+        className={styles.textinput}
+        placeholder={props.placeholder}
+        onChange={e => props.onChange(e.target.value)}
+        id='textInput'
+      />
+    </>
+    
   )
 }

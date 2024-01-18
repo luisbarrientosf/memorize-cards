@@ -4,9 +4,10 @@ interface ButtonProps {
   onClick: () => void;
   title: string;
   disabled?: boolean;
+  type?: "button"|"submit"|"reset"|undefined;
 }
 
-export const Button: React.FC<ButtonProps> = ({ onClick, title, disabled }) => {
+export const Button: React.FC<ButtonProps> = ({ onClick, title, disabled, type }) => {
   const buttonStyles = [styles.button];
   if (disabled) {
     buttonStyles.push(styles.disabled);
@@ -17,6 +18,7 @@ export const Button: React.FC<ButtonProps> = ({ onClick, title, disabled }) => {
       className={buttonStyles.join(" ")}
       onClick={onClick}
       disabled={disabled}
+      type={type}
     >
       {title} 
     </button>

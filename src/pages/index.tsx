@@ -41,9 +41,9 @@ export default function Home() {
         </h3>
       </div>
       
-      <div className={styles.form}>
-        Enter your name:
+      <form className={styles.form} onSubmit={e => e.preventDefault()}>
         <TextInput
+          label='Enter your name:'
           placeholder='John Doe'
           value={name}
           onChange={setName}
@@ -52,8 +52,10 @@ export default function Home() {
           title='Continue'
           disabled={name.trim().length === 0}
           onClick={handleContinueButton}
+          type='submit'
         />
-      </div>
+      </form>
+
       <div className={styles.author}>
         <p>Developed by</p>
         <p>Luis Barrientos Fajardo</p>
