@@ -26,13 +26,15 @@ interface EndGameMessageProps {
   turn: number;
   player: string;
   handleNewGame: () => void;
+  handleGoToHome: () => void;
 }
 
 export const EndGameMessage: React.FC<EndGameMessageProps> = (props) => {
   return(
     <div className={styles.container}>
       <p className={styles.title}>
-        Congratulations, <span>{ props.player }</span> !
+        Congratulations, <br />
+        <span>{ props.player }</span> !
       </p>
       <div className={styles.pointersContainer}>
         <Pointer
@@ -51,11 +53,16 @@ export const EndGameMessage: React.FC<EndGameMessageProps> = (props) => {
           color="#cb6144"
         />
       </div>
-
-      <Button
-        title="New Game"
-        onClick={props.handleNewGame}
-      />
+      <div className={styles.buttonsContainer}>
+        <Button
+          title="New Game"
+          onClick={props.handleNewGame}
+        />
+        <Button
+          title="Go to Home"
+          onClick={props.handleGoToHome}
+        />
+      </div>
     </div>
   )
 }

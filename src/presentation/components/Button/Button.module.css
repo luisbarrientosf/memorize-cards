@@ -22,7 +22,7 @@
 }
 
 .button:hover:not(.disabled){
-  background-color: hsl(169, 64%, 55%);
+  background-color: #43d6bb;
   color: #0f0f0f;
   transition: all 0.3s;
   cursor: pointer;

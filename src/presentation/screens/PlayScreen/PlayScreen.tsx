@@ -131,6 +131,7 @@ export default function PlayScreen() {
           turn={turn + 1}
           player={player}
           handleNewGame={handleNewGame}
+          handleGoToHome={() => router.push("/")}
         />
       )}
     </main>
