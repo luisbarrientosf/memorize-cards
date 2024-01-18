@@ -7,11 +7,12 @@ describe('TextInput', () => {
     render(
       <TextInput
         value=''
-        placeholder='placeholder-test'
+        placeholder='placeholder'
+        label='label'
         onChange={() => {}}
       />
     );
-    const input = screen.getByPlaceholderText("placeholder-test");
+    const input = screen.getByLabelText("label");
     expect(input).toBeInTheDocument();
   });
 
