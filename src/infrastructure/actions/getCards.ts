@@ -1,5 +1,5 @@
 import { Card } from "@/domain/entities/Card.entity";
-import { CardGetter } from "@/application/use-cases/card/CardGetter.usecase";
+import { CardGetter } from "@/application/use-cases/CardGetter.usecase";
 import { CardApi } from "../repositories/Card.api";
 
 export const getCards: () => Promise<Card[]> = () => {

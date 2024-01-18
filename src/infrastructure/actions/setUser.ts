@@ -1,5 +1,5 @@
 import { User } from "@/domain/entities/User.entity";
-import { UserSetter } from "@/application/use-cases/user/UserSetter.usecase";
+import { UserSetter } from "@/application/use-cases/UserSetter.usecase";
 import { UserLocalStorage } from "../repositories/User.localStorage"
 
 export const setUser: (name: string) => Promise<User> = (name) => {

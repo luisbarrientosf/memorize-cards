@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import { getCards } from '@/infrastructure/actions/getCards';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { MemorizeCard } from '@/presentation/components/MemorizeCard/MemorizeCard';
-import { shuffleArray } from '@/infrastructure/utils';
-import { Card } from '@/domain/entities/Card.entity';
 import { EndGameMessage } from '@/presentation/components/EndGameMessage/EndGameMessage';
-import styles from './play.module.css';
+import { Card } from '@/domain/entities/Card.entity';
+import { getCards } from '@/infrastructure/actions/getCards';
+import { shuffleArray } from '@/infrastructure/utils';
+import styles from './PlayScreen.module.css';
 
-export default function Play() {
+export default function PlayScreen() {
   const router = useRouter();
   const player = useSearchParams()!.get("player") || "";
   const [cards, setCards] = useState<Card[]|null>(null);
@@ -26,7 +26,9 @@ export default function Play() {
           const shuffledCards = shuffleArray(cards);
           setCards(shuffledCards);
         })
-        .catch(err => console.log({ err }));
+        .catch(() => {
+          // Manage error
+        });
     }
   }, [cards]);
 
@@ -98,7 +100,7 @@ export default function Play() {
   return (
     <main className={styles.main}>
       
-      <div className={styles.infoContainer}>
+      <p className={styles.infoContainer}>
         <span>
           Success: {successPoints}
         </span>
@@ -108,7 +110,7 @@ export default function Play() {
         <span>
           Fail: {failPoints}
         </span>
-      </div>
+      </p>
 
       <div className={styles.cardsContainer}>
         { cards && cards.map(card => 

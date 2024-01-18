@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { act, fireEvent, render, screen } from '@testing-library/react'
-import Home from "@/pages";
+import HomeScreen from '@/presentation/screens/HomeScreen/HomeScreen';
 import mockRouter from "next-router-mock";
 
 jest.mock('next/navigation', () => ({
@@ -8,9 +8,9 @@ jest.mock('next/navigation', () => ({
   push: jest.fn()
 }));
 
-describe('Home Screen', () => {
+describe('HomeScreen Screen', () => {
   it('renders correctly', () => {
-    render(<Home />);
+    render(<HomeScreen />);
     const welcomeText = screen.getByText('Memorize');
     expect(welcomeText).toBeInTheDocument();
     const input = screen.getByLabelText("Enter your name:")
@@ -20,7 +20,7 @@ describe('Home Screen', () => {
   });
 
   it('button is disabled when text input is empty', () => {
-    render(<Home />);
+    render(<HomeScreen />);
     const input = screen.getByLabelText("Enter your name:")
     expect(input).toBeInTheDocument();
     fireEvent.change(input, { target: { value: ""}});
@@ -29,7 +29,7 @@ describe('Home Screen', () => {
   });
 
   it('button is enabled when text input is not empty', () => {
-    render(<Home />);
+    render(<HomeScreen />);
     const input = screen.getByLabelText("Enter your name:")
     expect(input).toBeInTheDocument();
     fireEvent.change(input, { target: { value: "Player"}});
@@ -38,7 +38,7 @@ describe('Home Screen', () => {
   });
 
   it('navigate and save user when button is clicked', async () => {
-    render(<Home />);
+    render(<HomeScreen />);
     expect(mockRouter.pathname).toBe("/");
     expect(localStorage.getItem("userId")).toBe(null);
 

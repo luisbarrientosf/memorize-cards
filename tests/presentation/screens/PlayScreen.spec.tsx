@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom'
-import { act, fireEvent, render, screen } from '@testing-library/react'
-import Play from '@/pages/play';
-import fetchMock from "jest-fetch-mock"
-import { ModyoContentResponseMother } from '../../../__mocks__/ModyoContentResponse.mock';
+import fetchMock from "jest-fetch-mock";
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import PlayScreen from '@/presentation/screens/PlayScreen/PlayScreen';
+import { ModyoContentResponseMother } from '../../__mocks__/ModyoContentResponse.mock';
 
 const PLAYER_NAME = "Luis Barrientos Fajardo";
 
@@ -15,13 +15,13 @@ jest.mock('next/navigation', () => ({
 
 fetchMock.enableMocks();
 
-describe('Play Screen', () => {
+describe('PlayScreen', () => {
   const mockImages = ModyoContentResponseMother.default();
   fetchMock.mockResponse(JSON.stringify(mockImages));
   jest.useFakeTimers();
 
   it('renders correctly', async () => {
-    await act(() => render(<Play />));
+    await act(() => render(<PlayScreen />));
     expect(screen.getByText('Turn 1')).toBeInTheDocument();
     expect(screen.getByText('Success: 0')).toBeInTheDocument();
     expect(screen.getByText('Fail: 0')).toBeInTheDocument();
@@ -30,7 +30,7 @@ describe('Play Screen', () => {
   });
 
   it('does a success turn correctly', async () => {
-    await act(() => render(<Play />));
+    await act(() => render(<PlayScreen />));
 
     const choiceOne = screen.getByAltText(`card ${mockImages.entries[0].fields.image.uuid}`);
     const choiceTwo = screen.getByAltText(`card ${mockImages.entries[0].fields.image.uuid}_2`);
@@ -54,7 +54,7 @@ describe('Play Screen', () => {
   });
 
   it('does a error turn correctly', async () => {
-    await act(() => render(<Play />));
+    await act(() => render(<PlayScreen />));
 
     const choiceOne = screen.getByAltText(`card ${mockImages.entries[0].fields.image.uuid}`);
     const choiceTwo = screen.getByAltText(`card ${mockImages.entries[1].fields.image.uuid}`);
@@ -80,7 +80,7 @@ describe('Play Screen', () => {
   it('shows end game message', async () => {
     const mockImages = ModyoContentResponseMother.twoImages();
     fetchMock.mockResponse(JSON.stringify(mockImages));
-    await act(() => render(<Play />));
+    await act(() => render(<PlayScreen />));
 
     const choiceOne = screen.getByAltText(`card ${mockImages.entries[0].fields.image.uuid}`);
     const choiceTwo = screen.getByAltText(`card ${mockImages.entries[0].fields.image.uuid}_2`);

@@ -1,15 +1,15 @@
 "use client";
-import styles from './index.module.css';
-import { TextInput } from '@/presentation/components/TextInput/TextInput';
-import { Button } from '@/presentation/components/Button/Button';
+import styles from './HomeScreen.module.css';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/presentation/components/Button/Button';
+import { TextInput } from '@/presentation/components/TextInput/TextInput';
+import { User } from '@/domain/entities/User.entity';
 import { getUser } from '@/infrastructure/actions/getUser';
 import { setUser } from '@/infrastructure/actions/setUser';
-import { User } from '@/domain/entities/User.entity';
-import { useRouter } from 'next/navigation';
 
 
-export default function Home() {
+export default function HomeScreen() {
   const router = useRouter();
   const [userLogged, setUserLogged] = useState<User|null>(null);
   const [name, setName] = useState<string>("");
@@ -21,7 +21,9 @@ export default function Home() {
           setName(user.name);
           setUserLogged(user)
         })
-        .catch(err => console.log({ err }));
+        .catch(() => {
+          // Manage error
+        });
     }
   }, [userLogged]);
 
