@@ -14,7 +14,7 @@ export const TextInput: React.FC<TextInputProps> = (props) => {
       <input
         type='text'
         value={props.value}
-        className={styles.textinput}
+        className={styles.textInput}
         placeholder={props.placeholder}
         onChange={e => props.onChange(e.target.value)}
         id='textInput'
