@@ -44,7 +44,7 @@ describe('Play Screen', () => {
     expect(choiceOne.parentElement?.parentElement).toHaveClass("matched");
     expect(choiceTwo.parentElement?.parentElement).toHaveClass("matched");
 
-    jest.advanceTimersByTime(2000);
+    await act(async () => jest.advanceTimersByTime(2000));
   
     expect(await screen.findByText('Turn 2')).toBeInTheDocument();
     expect(await screen.findByText('Success: 1')).toBeInTheDocument();
@@ -68,7 +68,7 @@ describe('Play Screen', () => {
     expect(choiceOne.parentElement?.parentElement).toHaveClass("error");
     expect(choiceTwo.parentElement?.parentElement).toHaveClass("error");
 
-    jest.advanceTimersByTime(2000);
+    await act(async () => jest.advanceTimersByTime(2000));
   
     expect(await screen.findByText('Turn 2')).toBeInTheDocument();
     expect(await screen.findByText('Success: 0')).toBeInTheDocument();
