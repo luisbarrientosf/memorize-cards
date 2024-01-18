@@ -1,5 +1,5 @@
 "use client";
-import styles from './page.module.css';
+import styles from './index.module.css';
 import { TextInput } from '@/presentation/components/TextInput/TextInput';
 import { Button } from '@/presentation/components/Button/Button';
 import { useEffect, useState } from 'react';
