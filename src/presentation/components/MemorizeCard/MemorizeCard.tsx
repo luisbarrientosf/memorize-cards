@@ -26,6 +26,7 @@ export const MemorizeCard: React.FC<MemorizeCardProps> = (props) => {
     <div
       className={containerStyles.join(" ")}
       onClick={props.onClick}
+      role='button'
     >
       <div className={styles.inner}>
         <div className={styles.back}>
