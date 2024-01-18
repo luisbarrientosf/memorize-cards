@@ -34,7 +34,7 @@ export const MemorizeCard: React.FC<MemorizeCardProps> = (props) => {
         </div>
         
         <Image
-          alt='card image'
+          alt={`card ${props.card.id}`}
           className={styles.image}
           width={100}
           height={120}
