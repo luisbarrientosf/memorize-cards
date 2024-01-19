@@ -11,6 +11,7 @@ describe('EndGameMessage', () => {
         failPoints={5}
         turn={15}
         handleNewGame={() => {}}
+        handleGoToHome={() => {}}
       />
     );
 
@@ -26,7 +27,7 @@ describe('EndGameMessage', () => {
   });
 
   it('fire handleNewGame function when button clicked', () => {
-    const spyFn = jest.fn()
+    const spyFn = jest.fn();
     render(
       <EndGameMessage
         player='test'
@@ -34,9 +35,28 @@ describe('EndGameMessage', () => {
         failPoints={5}
         turn={15}
         handleNewGame={spyFn}
+        handleGoToHome={() => {}}
       />
     );
-    const button = screen.getByRole('button');
+    const button = screen.getByRole('button', { name: "New Game" });
+    expect(button).toBeInTheDocument();
+    fireEvent.click(button);
+    expect(spyFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('fire handleGoToHome function when button clicked', () => {
+    const spyFn = jest.fn();
+    render(
+      <EndGameMessage
+        player='test'
+        successPoints={10}
+        failPoints={5}
+        turn={15}
+        handleNewGame={() => {}}
+        handleGoToHome={spyFn}
+      />
+    );
+    const button = screen.getByRole('button', { name: "Go to Home" });
     expect(button).toBeInTheDocument();
     fireEvent.click(button);
     expect(spyFn).toHaveBeenCalledTimes(1);
