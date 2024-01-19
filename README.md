@@ -46,7 +46,7 @@ Developed by **Luis Barrientos Fajardo** using
 
 ## Posible improvements
 
-* Difficulty-selector screen (changes number images received from API).
+* Difficulty-selector screen (change number of images received from API).
 * Highscore-by-name screen.
 * Add multiple language support.
 * Better error handling.
