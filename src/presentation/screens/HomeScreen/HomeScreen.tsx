@@ -2,11 +2,10 @@
 import styles from './HomeScreen.module.css';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/presentation/components/Button/Button';
-import { TextInput } from '@/presentation/components/TextInput/TextInput';
 import { User } from '@/domain/entities/User.entity';
 import { getUser } from '@/infrastructure/actions/getUser';
 import { setUser } from '@/infrastructure/actions/setUser';
+import { LoginForm } from '@/presentation/components/LoginForm/LoginForm';
 
 
 export default function HomeScreen() {
@@ -19,11 +18,9 @@ export default function HomeScreen() {
       getUser()
         .then(user => {
           setName(user.name);
-          setUserLogged(user)
+          setUserLogged(user);
         })
-        .catch(() => {
-          // Manage error
-        });
+        .catch(() => setName("User"));
     }
   }, [userLogged]);
 
@@ -43,21 +40,11 @@ export default function HomeScreen() {
         </h3>
       </div>
       
-      <form className={styles.form} onSubmit={e => e.preventDefault()}>
-        <TextInput
-          label='Enter your name:'
-          placeholder='John Doe'
-          value={name}
-          onChange={setName}
-          autoFocus
-        />
-        <Button
-          title='Continue'
-          disabled={name.trim().length === 0}
-          onClick={handleContinueButton}
-          type='submit'
-        />
-      </form>
+      <LoginForm
+        name={name}
+        onChangeName={name => setName(name)}
+        handleContinueButton={handleContinueButton}
+      />
 
       <footer className={styles.author}>
         <p>Developed by</p>

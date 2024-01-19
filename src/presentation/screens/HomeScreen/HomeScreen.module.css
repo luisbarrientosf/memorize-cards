@@ -7,14 +7,6 @@
   row-gap: 100px;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 15px;
-  font-weight: 300;
-}
-
 .title {
   display: flex;
   flex-direction: column;

@@ -6,8 +6,6 @@ This project is developed as a technical test using Next.js.
 
 You can visit (this link)[https://memorize-cards.vercel.app/] to try a live demo deployed on Vercel.
 
-
-
 ## How to run (dev)
 
 Start your shell.
@@ -48,11 +46,14 @@ Developed by **Luis Barrientos Fajardo** using
 
 ### Posible improvements
 
-* Difficulty selector screen (changes number images received from API).
-* Highscore by name screen.
+* Difficulty-selector screen (changes number images received from API).
+* Highscore-by-name screen.
+* Add multiple language support.
+* Better error handling.
 * Better alt names for card images (screen reading).
 * Better card-back image.
-* Maybe add sound effects.
 * Add storybook for components documentation.
-* Improve ESLint configuration.
 * Add more validations on domain layer (example: url or uuid format)
+* More UI details (hints, animations, better texts)
+* Improve ESLint configuration.
+* Maybe add sound effects.
