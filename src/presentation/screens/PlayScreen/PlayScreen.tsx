@@ -46,7 +46,7 @@ export default function PlayScreen() {
         }
         setTurn(prevTurn => prevTurn + 1);
         setSelectedCards([]);
-      }, 1200);
+      }, 1000);
     }
   }, [endTurn, cards, router]);
 
