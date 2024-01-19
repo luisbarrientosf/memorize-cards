@@ -1,6 +1,6 @@
 # memorize-cards
 
-This project is developed as a technical test using Next.js.
+This project was developed as a technical challenge using Next.js.
 
 ## Demo
 
