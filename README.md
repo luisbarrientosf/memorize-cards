@@ -4,7 +4,7 @@ This project is developed as a technical test using Next.js.
 
 ## Demo
 
-You can visit (this link)[https://memorize-cards.vercel.app/] to try a live demo deployed on Vercel.
+You can visit [https://memorize-cards.vercel.app/](this link) to try a live demo deployed on Vercel.
 
 ## How to run (dev)
 
