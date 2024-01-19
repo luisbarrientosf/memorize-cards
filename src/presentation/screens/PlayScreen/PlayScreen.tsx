@@ -6,8 +6,9 @@ import { EndGameMessage } from '@/presentation/components/EndGameMessage/EndGame
 import { Card } from '@/domain/entities/Card.entity';
 import { getCards } from '@/infrastructure/actions/getCards';
 import { shuffleArray } from '@/infrastructure/utils';
-import styles from './PlayScreen.module.css';
 import { Loading } from '@/presentation/components/Loading/Loading';
+import { ErrorRetry } from '@/presentation/components/ErrorRetry/ErrorRetry';
+import styles from './PlayScreen.module.css';
 
 export default function PlayScreen() {
   const router = useRouter();
@@ -19,19 +20,18 @@ export default function PlayScreen() {
   const [turn, setTurn] = useState<number>(0);
   const [isEndTurn, setIsEndTurn] = useState<boolean>(false);
   const [isEndGame, setIsEndGame] = useState<boolean>(false);
+  const [error, setError] = useState<string|null>(null);
 
   useEffect(() => {
-    if (!cards) {
+    if (!cards && !error) {
       getCards()
         .then(cards => {
           const shuffledCards = shuffleArray(cards);
           setCards(shuffledCards);
         })
-        .catch(() => {
-          // Manage error
-        });
+        .catch(() => setError("Error while fetching cards"));
     }
-  }, [cards]);
+  }, [cards, error]);
 
   useEffect(() => {
     if (isEndTurn) {
@@ -115,7 +115,14 @@ export default function PlayScreen() {
         </span>
       </p>
 
-      { !cards && <Loading /> }
+      { (!cards && !error) && <Loading /> }
+
+      { error && (
+        <ErrorRetry
+          errorMessage={error}
+          handleRetry={() => setError(null)}
+        />
+      )}
       
       { cards && (
         <div className={styles.cardsContainer}>
