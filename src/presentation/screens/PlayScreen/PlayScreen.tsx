@@ -14,10 +14,10 @@ export default function PlayScreen() {
   const player = useSearchParams()!.get("player") || "";
   const [cards, setCards] = useState<Card[]|null>(null);
   const [selectedCards, setSelectedCards] = useState<Card[]>([]);
-  const [endTurn, setEndTurn] = useState<boolean>(false);
-  const [turn, setTurn] = useState<number>(0);
   const [successPoints, setSuccessPoints] = useState<number>(0);
   const [failPoints, setFailPoints] = useState<number>(0);
+  const [turn, setTurn] = useState<number>(0);
+  const [isEndTurn, setIsEndTurn] = useState<boolean>(false);
   const [isEndGame, setIsEndGame] = useState<boolean>(false);
 
   useEffect(() => {
@@ -34,24 +34,31 @@ export default function PlayScreen() {
   }, [cards]);
 
   useEffect(() => {
-    if (endTurn) {
+    if (isEndTurn) {
       setTimeout(() => {
-        setEndTurn(false);
-        if(cards){
+        setIsEndTurn(false);
+        if (selectedCards.length === 2) {
+          if (selectedCards[0].uuid === selectedCards[1].uuid ) {
+            setSuccessPoints(prevSuccessPoints => prevSuccessPoints + 1);
+          } else {
+            setFailPoints(prevFailPoints => prevFailPoints + 1);
+          }
+        }
+        setSelectedCards([]);
+
+        if (cards) {
           if (cards.length === cards.filter(c => c.matched).length) {
             setIsEndGame(true);
-            setSelectedCards([]);
             return;
           }
         }
         setTurn(prevTurn => prevTurn + 1);
-        setSelectedCards([]);
       }, 1000);
     }
-  }, [endTurn, cards, router]);
+  }, [isEndTurn, selectedCards, cards]);
 
   useEffect(() => {
-    if (selectedCards.length === 2 && !endTurn) {
+    if (selectedCards.length === 2 && !isEndTurn) {
       if (selectedCards[0].uuid === selectedCards[1].uuid ) {
         setCards(prevCards => prevCards!.map(card => {
           if (selectedCards.find(c => c.id === card.id)){
@@ -59,15 +66,10 @@ export default function PlayScreen() {
           } 
           return card;
         }));
-      
-        setSuccessPoints(prevSuccessPoints => prevSuccessPoints + 1);
-      } else {
-        setFailPoints(prevFailPoints => prevFailPoints + 1);
       }
-      
-      setEndTurn(true);
+      setIsEndTurn(true);
     }
-  }, [selectedCards, successPoints, failPoints, turn, endTurn]);
+  }, [selectedCards, isEndTurn]);
 
 
   const handleCardClick = (selectedCard: Card) => {

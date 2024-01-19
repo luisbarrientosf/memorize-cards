@@ -20,10 +20,11 @@
 .infoContainer span {
   width: 100px;
   text-align: center;
+  font-size: 18px;
 }
 
 .infoContainer span:nth-child(2) {
-  font-size: 22px;
+  font-size: 30px;
 }
 
 .cardsContainer {
