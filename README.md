@@ -4,7 +4,7 @@ This project is developed as a technical test using Next.js.
 
 ## Demo
 
-You can visit [https://memorize-cards.vercel.app/](this link) to try a live demo deployed on Vercel.
+You can visit [this link](https://memorize-cards.vercel.app/) to try a live demo deployed on Vercel.
 
 ## How to run (dev)
 
@@ -31,7 +31,7 @@ Developed by **Luis Barrientos Fajardo** using
 - Jest 29.7
 - testing-library/react 14.1
 
-### Considerations
+## Considerations
 
 * DDD architecture.
 * CSS Modules pattern.
@@ -44,7 +44,7 @@ Developed by **Luis Barrientos Fajardo** using
 * I consider that UI libraries like Tailwind, Material or Bootstrap are unnecesary because all components are hand-crafted.
 * I prefer the use of Typescript over Javascript Vanilla beacuse typing provides me more security to develop robust and scalable software.
 
-### Posible improvements
+## Posible improvements
 
 * Difficulty-selector screen (changes number images received from API).
 * Highscore-by-name screen.
