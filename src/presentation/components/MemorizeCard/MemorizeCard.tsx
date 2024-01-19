@@ -23,10 +23,9 @@ export const MemorizeCard: React.FC<MemorizeCardProps> = (props) => {
   }
 
   return (
-    <div
+    <button
       className={containerStyles.join(" ")}
       onClick={props.onClick}
-      role='button'
     >
       <div className={styles.inner}>
         <div className={styles.back}>
@@ -41,6 +40,6 @@ export const MemorizeCard: React.FC<MemorizeCardProps> = (props) => {
           src={props.card.url}
         />
       </div>
-    </div>
+    </button>
   )
 }

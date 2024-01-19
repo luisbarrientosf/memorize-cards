@@ -5,6 +5,7 @@ interface TextInputProps {
   onChange: (value: string) => void;
   placeholder?: string;
   label: string;
+  autoFocus?: boolean;
 }
 
 export const TextInput: React.FC<TextInputProps> = (props) => {
@@ -18,6 +19,7 @@ export const TextInput: React.FC<TextInputProps> = (props) => {
         placeholder={props.placeholder}
         onChange={e => props.onChange(e.target.value)}
         id='textInput'
+        autoFocus={props.autoFocus}
       />
     </>
     

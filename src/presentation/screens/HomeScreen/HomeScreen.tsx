@@ -49,6 +49,7 @@ export default function HomeScreen() {
           placeholder='John Doe'
           value={name}
           onChange={setName}
+          autoFocus
         />
         <Button
           title='Continue'
@@ -58,10 +59,10 @@ export default function HomeScreen() {
         />
       </form>
 
-      <div className={styles.author}>
+      <footer className={styles.author}>
         <p>Developed by</p>
         <p>Luis Barrientos Fajardo</p>
-      </div>
+      </footer>
   
     </main>
   )

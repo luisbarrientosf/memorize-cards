@@ -57,6 +57,7 @@ export const EndGameMessage: React.FC<EndGameMessageProps> = (props) => {
         <Button
           title="New Game"
           onClick={props.handleNewGame}
+          autoFocus
         />
         <Button
           title="Go to Home"

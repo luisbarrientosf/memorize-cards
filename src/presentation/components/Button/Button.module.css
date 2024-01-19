@@ -21,6 +21,10 @@
   align-self: center;
 }
 
+.button:focus {
+  border: 1px solid transparent;
+}
+
 .button:hover:not(.disabled){
   background-color: #43d6bb;
   color: #0f0f0f;
