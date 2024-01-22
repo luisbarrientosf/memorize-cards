@@ -14,7 +14,7 @@ export const EndGameMessage: React.FC<EndGameMessageProps> = (props) => {
     <div className="absolute flex justify-center items-center flex-col gap-y-10 text-white bg-black bg-opacity-80 top-0 w-full min-h-[100vh]">
       <p className="text-center text-2xl">
         Congratulations, <br />
-        <span className="text-[#96c09b]">{ props.player }</span> !
+        <span className="text-[#96c09b] text-4xl">{ props.player }</span> !
       </p>
       <div className="flex flex-row gap-x-7">
         <Pointer
