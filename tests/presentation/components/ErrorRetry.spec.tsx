@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { ErrorRetry } from "../../../src/presentation/components/ErrorRetry/ErrorRetry"
+import { ErrorRetry } from "../../../src/presentation/components/ErrorRetry"
 
 describe('ErrorRetry', () => {
   it('renders correctly', () => {

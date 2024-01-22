@@ -1,11 +1,10 @@
 "use client";
-import styles from './HomeScreen.module.css';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { User } from '@/domain/entities/User.entity';
 import { getUser } from '@/infrastructure/actions/getUser';
 import { setUser } from '@/infrastructure/actions/setUser';
-import { LoginForm } from '@/presentation/components/LoginForm/LoginForm';
+import { LoginForm } from '@/presentation/components/LoginForm';
 
 
 export default function HomeScreen() {
@@ -30,15 +29,15 @@ export default function HomeScreen() {
   }
 
   return (
-    <main className={styles.main}>
-      <div className={styles.title}>
-        <h1>
+    <main className="flex flex-col items-center p-24 min-[100vh] gap-28">
+      <section className="flex flex-col justify-center items-center">
+        <h1 className="text-3xl">
           Memorize 
         </h1>
-        <h3>
+        <h3 className="text-xl">
           Card Game
         </h3>
-      </div>
+      </section>
       
       <LoginForm
         name={name}
@@ -46,9 +45,9 @@ export default function HomeScreen() {
         handleContinueButton={handleContinueButton}
       />
 
-      <footer className={styles.author}>
-        <p>Developed by</p>
-        <p>Luis Barrientos Fajardo</p>
+      <footer className="text-center">
+        <p className="font-extralight">Developed by</p>
+        <p className="font-normal">Luis Barrientos Fajardo</p>
       </footer>
   
     </main>

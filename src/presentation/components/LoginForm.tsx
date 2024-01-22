@@ -1,6 +1,5 @@
-import { Button } from "../Button/Button";
-import { TextInput } from "../TextInput/TextInput";
-import styles from "./LoginForm.module.css";
+import { Button } from "./Button";
+import { TextInput } from "./TextInput";
 
 interface LoginFormProps {
   name: string;
@@ -10,7 +9,10 @@ interface LoginFormProps {
 
 export const LoginForm: React.FC<LoginFormProps> = (props) => {
   return (
-    <form className={styles.form} onSubmit={e => e.preventDefault()}>
+    <form
+      className="flex flex-col justify-between gap-4 font-light"
+      onSubmit={e => e.preventDefault()}
+    >
       <TextInput
         label='Enter your name:'
         placeholder='John Doe'

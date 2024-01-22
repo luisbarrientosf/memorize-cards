@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { act, fireEvent, render, screen } from '@testing-library/react'
-import { LoginForm } from '@/presentation/components/LoginForm/LoginForm';
+import { LoginForm } from '@/presentation/components/LoginForm';
 
 describe('LoginForm', () => {
   it('renders correctly', () => {

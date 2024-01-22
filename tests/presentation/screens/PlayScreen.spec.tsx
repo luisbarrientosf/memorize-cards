@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import fetchMock from "jest-fetch-mock";
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import PlayScreen from '@/presentation/screens/PlayScreen/PlayScreen';
+import PlayScreen from '@/presentation/screens/PlayScreen';
 import { ModyoContentResponseMother } from '../../__mocks__/ModyoContentResponse.mock';
 
 const PLAYER_NAME = "Luis Barrientos Fajardo";

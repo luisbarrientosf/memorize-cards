@@ -1,25 +1,5 @@
-import { Button } from "../Button/Button";
-import styles from "./EndGameMessage.module.css";
-
-interface PointerProps {
-  points: number;
-  title: string;
-  color: string;
-}
-
-const Pointer: React.FC<PointerProps> = ({ points, title, color }) => {
-  return (
-    <div className={styles.pointsContainer} style={{ color }}>
-      <p className={styles.pointsNumber}>
-        {points}
-      </p>
-      <p className={styles.pointsText}>
-        {title}
-      </p>
-    </div>
-  )
-}
-
+import { Button } from "./Button";
+import { Pointer } from "./Pointer";
 interface EndGameMessageProps {
   successPoints: number;
   failPoints: number;
@@ -31,12 +11,12 @@ interface EndGameMessageProps {
 
 export const EndGameMessage: React.FC<EndGameMessageProps> = (props) => {
   return(
-    <div className={styles.container}>
-      <p className={styles.title}>
+    <div className="absolute flex justify-center items-center flex-col gap-y-10 text-white bg-black bg-opacity-80 top-0 w-full min-h-[100vh]">
+      <p className="text-center text-2xl">
         Congratulations, <br />
-        <span>{ props.player }</span> !
+        <span className="text-[#96c09b]">{ props.player }</span> !
       </p>
-      <div className={styles.pointersContainer}>
+      <div className="flex flex-row gap-x-7">
         <Pointer
           points={props.successPoints}
           title="Success"
@@ -53,7 +33,7 @@ export const EndGameMessage: React.FC<EndGameMessageProps> = (props) => {
           color="#cb6144"
         />
       </div>
-      <div className={styles.buttonsContainer}>
+      <div className="flex flex-col justify-center gap-y-5 mt-5">
         <Button
           title="New Game"
           onClick={props.handleNewGame}

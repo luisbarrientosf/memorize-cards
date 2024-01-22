@@ -1,4 +1,4 @@
-import PlayScreen from "@/presentation/screens/PlayScreen/PlayScreen";
+import PlayScreen from "@/presentation/screens/PlayScreen";
 
 export default function Play() {
   return (

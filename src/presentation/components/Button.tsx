@@ -1,5 +1,3 @@
-import styles from './Button.module.css'
-
 interface ButtonProps {
   onClick: () => void;
   title: string;
@@ -9,14 +7,14 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({ onClick, title, disabled, type, autoFocus }) => {
-  const buttonStyles = [styles.button];
+  const buttonStyles = ["bg-[#808080] text-[#505050]"];
   if (disabled) {
-    buttonStyles.push(styles.disabled);
+    buttonStyles.push("bg-[#808080] text-[#505050]");
   }
 
   return (
     <button
-      className={buttonStyles.join(" ")}
+      className="flex flex-row justify-center items-center bg-[#28b69c] text-[#0f0f0f] self-center shadow shadow-black/30 gap-2 py-2 px-5 text-sm min-w-[120px] w-[200px] font-semibold rounded-3xl transition-all duration-300 hover:bg-[#43d6bb] hover:duration-300"
       onClick={onClick}
       disabled={disabled}
       type={type}

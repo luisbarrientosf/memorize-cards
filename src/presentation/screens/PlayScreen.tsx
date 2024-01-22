@@ -2,13 +2,12 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { MemorizeCard } from '@/presentation/components/MemorizeCard/MemorizeCard';
-import { EndGameMessage } from '@/presentation/components/EndGameMessage/EndGameMessage';
+import { EndGameMessage } from '@/presentation/components/EndGameMessage';
 import { Card } from '@/domain/entities/Card.entity';
 import { getCards } from '@/infrastructure/actions/getCards';
 import { shuffleArray } from '@/infrastructure/utils';
 import { Loading } from '@/presentation/components/Loading/Loading';
-import { ErrorRetry } from '@/presentation/components/ErrorRetry/ErrorRetry';
-import styles from './PlayScreen.module.css';
+import { ErrorRetry } from '@/presentation/components/ErrorRetry';
 
 export default function PlayScreen() {
   const router = useRouter();
@@ -101,16 +100,16 @@ export default function PlayScreen() {
   }
 
   return (
-    <main className={styles.main}>
+    <main className="flex flex-col items-center overflow-y-hidden">
       
-      <p className={styles.infoContainer}>
-        <span>
+      <p className="flex flex-row justify-center items-center gap-x-7 h-20 py-8 mb-5">
+        <span className="w-24 text-center text-lg">
           Success: {successPoints}
         </span>
-        <span>
+        <span className="w-24 text-center text-3xl">
           Turn {turn + 1}
         </span>
-        <span>
+        <span className="w-24 text-center text-lg">
           Fail: {failPoints}
         </span>
       </p>
@@ -125,7 +124,7 @@ export default function PlayScreen() {
       )}
       
       { cards && (
-        <div className={styles.cardsContainer}>
+        <section className="flex justify-center items-center w-full flex-wrap max-w-[600px] py-3">
           { cards.map(card => 
             <MemorizeCard
               key={card.id}
@@ -135,7 +134,7 @@ export default function PlayScreen() {
               onClick={() => handleCardClick(card)}
             />
           )}
-        </div>
+        </section>
       )}
       
       { isEndGame && (

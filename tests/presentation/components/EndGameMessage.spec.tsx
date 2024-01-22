@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { EndGameMessage } from "../../../src/presentation/components/EndGameMessage/EndGameMessage"
+import { EndGameMessage } from "../../../src/presentation/components/EndGameMessage"
 
 describe('EndGameMessage', () => {
   it('renders correctly', () => {

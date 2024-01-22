@@ -1,5 +1,3 @@
-import styles from './TextInput.module.css'
-
 interface TextInputProps {
   value: string;
   onChange: (value: string) => void;
@@ -15,7 +13,7 @@ export const TextInput: React.FC<TextInputProps> = (props) => {
       <input
         type='text'
         value={props.value}
-        className={styles.textInput}
+        className="bg-[#dadada] text-black py-2 px-5 rounded-3xl text-sm min-w-[200px] border-transparent shadow shadow-black/30"
         placeholder={props.placeholder}
         onChange={e => props.onChange(e.target.value)}
         id='textInput'

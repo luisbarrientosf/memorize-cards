@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { TextInput } from "../../../src/presentation/components/TextInput/TextInput"
+import { TextInput } from "../../../src/presentation/components/TextInput"
 
 describe('TextInput', () => {
   it('renders correctly', () => {
