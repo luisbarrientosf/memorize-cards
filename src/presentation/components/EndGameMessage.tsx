@@ -42,6 +42,7 @@ export const EndGameMessage: React.FC<EndGameMessageProps> = (props) => {
         <Button
           title="Go to Home"
           onClick={props.handleGoToHome}
+          secondary
         />
       </div>
     </div>
